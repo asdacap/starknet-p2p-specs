@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package starknet.sync;
 
-import "p2p/proto/common.proto";
-import "p2p/proto/propagation.proto";
+import "common.proto";
+import "propagation.proto";
 
 message Request {
     oneof request {
@@ -29,11 +29,15 @@ enum Direction {
 }
 
 message GetBlockHeaders {
-    starknet.common.FieldElement start_block =
-        2;            // block hash of the starting block
-    uint64 count = 3; // how many block, at most, to retrieve from this requested
-    // starting point
-    uint64 size_limit = 4; // limit on size of returned messages.
+    uint32 request_id = 1;
+
+    oneof start_block {
+        starknet.common.FieldElement block_hash = 2; //block hash of the starting block
+        uint64 block_number = 6;
+    }
+
+    uint64 count = 3; //how many block, at most, to retrieve from this requested starting point
+    uint64 size_limit = 4; //limit on size of returned messages.
 
     Direction direction = 5;
 }
