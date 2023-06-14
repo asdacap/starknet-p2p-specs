@@ -32,7 +32,7 @@ message GetBlockHeaders {
     uint32 request_id = 1;
 
     oneof start_block {
-        starknet.common.FieldElement block_hash = 2; //block hash of the starting block
+        starknet.common.FieldElement block_hash = 2;
         uint64 block_number = 6;
     }
 
